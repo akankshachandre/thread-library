@@ -42,8 +42,11 @@ void MySemaphoreWait(MySemaphore sem);
 int MySemaphoreDestroy(MySemaphore sem);
 
 // ****** CALLS ONLY FOR UNIX PROCESS ******
-// Create and run the "main" thread
+// Create and run the "main" threada
 void MyThreadInit(void(*start_funct)(void *), void *args);
+
+void MyThreadInitExtra(void);
+
 
 #endif /* MYTHREAD_H */
 /*........................ end of mythread.h ................................*/

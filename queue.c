@@ -1,3 +1,9 @@
+/*
+ * queue.c
+ *
+ *  Created on: Sep 24, 2016
+ *      Author: akanksha
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <ucontext.h>
@@ -27,22 +33,17 @@ void Dequeue(struct Queue* queue){
 	struct My_Thread* temp = queue->front;
 	if(queue->front == NULL) {
 		printf("Queue is Empty\n");
-		return;
 	}
-	if(queue->front == queue->rear) {
+	if(queue->front == queue->rear)
 		queue->front = queue->rear = NULL;
-	}
-	else {
+	else
 		queue->front = queue->front->next;
-	}
-	//free(temp);
 }
 
 
 
 struct My_Thread* Front(struct Queue* queue) {
 	if(queue->front == NULL) {
-		printf("Queue is empty\n");
 		return NULL;
 	}
 	return queue->front;
@@ -52,7 +53,7 @@ int isQueueEmpty(struct Queue* queue){
 	if(queue->front==NULL){
 		return 0;
 	}
-	else 
+	else
 		return -1;
 }
 
@@ -61,6 +62,7 @@ int isQueueEmpty(struct Queue* queue){
 int isChild(struct Queue* queue,struct My_Thread* thread){
 	if(queue->front==NULL)
 		return -1;
+
 	else{
 		struct My_Thread *curr = queue->front;
 		while(curr!=NULL){
@@ -76,21 +78,20 @@ int isChild(struct Queue* queue,struct My_Thread* thread){
 
 void removeFromQueue(struct Queue* queue,struct My_Thread* thread){
 	struct My_Thread* curr = queue->front;
-	struct My_Thread* prev = NULL;
-	while(curr!=NULL){
-		if(curr==thread){
-			if(prev==NULL){
-				queue->front = curr->next;
-				//free(curr);
+
+	if(queue->front==thread || queue->front==NULL)
+		queue->front=NULL;
+
+	else{
+		while(curr!=NULL){
+			if(curr->next==thread){
+				curr->next = curr->next->next;
 				break;
 			}
-			else{
-				prev->next = curr->next;
-				//free(curr);
-				break;
-			}
+			curr = curr->next;
 		}
-		prev = curr;
-		curr = curr->next;
 	}
+
 }
+
+

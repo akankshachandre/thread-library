@@ -7,7 +7,7 @@ struct My_Thread;
 
 struct Queue {
 	struct My_Thread* front;
-	struct My_Thread* rear;	
+	struct My_Thread* rear;
 };
 
 struct My_Thread {
@@ -18,7 +18,12 @@ struct My_Thread {
 	struct My_Thread* invokedOn;
 	char* status;
 };
-// Two glboal variables to store address of front and rear nodes. 
+
+struct My_Semaphore{
+	int value;
+	struct Queue* semQueue;
+};
+// Two glboal variables to store address of front and rear nodes.
 
 void initializeQueue(struct Queue* queue);
 
